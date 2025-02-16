@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/menu")
 class MenuController @Autowired constructor(
-
     private val menuService: MenuService
-
 ) {
 
     @GetMapping("")
     fun findMenu(): ResponseEntity<List<MenuDto>> {
 
         val menu: List<MenuDto>? = menuService.findMenu()
-        return ResponseEntity.ok(menu ?: emptyList());
+        return ResponseEntity.ok(menu);
     }
 
     @GetMapping("/{id}")

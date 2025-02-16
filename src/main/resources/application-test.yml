@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: coffee-order-system
+  datasource:
+    url: jdbc:mysql://localhost:53306/coffee_order_test
+    username: root
+    password: Dlcksgml09@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  # 개발 중에는 update, 운영 시에는 validate 또는 none 권장
+    show-sql: true
+    open-in-view: false

@@ -4,15 +4,18 @@ import org.example.coffeeordersystem.ControllerTestSupporter
 import org.example.coffeeordersystem.model.dto.MenuDto
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.mockito.BDDMockito.given
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.util.*
 
 @WebMvcTest(MenuController::class)
-class MenuControllerTest: ControllerTestSupporter() {
+@ActiveProfiles("test")
+class MenuControllerTest : ControllerTestSupporter() {
 
     @DisplayName("[커피 메뉴 목록 조회 API] 전체 메뉴를 조회한다.")
     @Test
@@ -24,11 +27,9 @@ class MenuControllerTest: ControllerTestSupporter() {
             MenuDto(id = 1, name = "Americano", description = "Hot Americano", price = 3000L),
             MenuDto(id = 2, name = "Latte", description = "Creamy Latte", price = 3500L)
         )
+        given(menuService.findMenu()).willReturn(menuResponses)
 
-        // when
-        Mockito.`when`(menuService.findMenu()).thenReturn(menuResponses)
-
-        // then
+        // when && then
         mockMvc.perform(MockMvcRequestBuilders.get("/api/menu"))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -45,12 +46,10 @@ class MenuControllerTest: ControllerTestSupporter() {
     fun testFindMenuWithNull() {
 
         // given
-        val menuResponses: List<MenuDto>? = null
+        val menuResponses: List<MenuDto> = emptyList()
+        given(menuService.findMenu()).willReturn(menuResponses)
 
-        // when
-        Mockito.`when`(menuService.findMenu()).thenReturn(menuResponses)
-
-        // then
+        // when && then
         mockMvc.perform(MockMvcRequestBuilders.get("/api/menu"))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -70,11 +69,9 @@ class MenuControllerTest: ControllerTestSupporter() {
             description = "Hot Americano",
             price = 3000L
         )
+        given(menuService.findMenu(1)).willReturn(menuResponses)
 
-        // when
-        Mockito.`when`(menuService.findMenu(1)).thenReturn(menuResponses)
-
-        // then
+        // when && then
         mockMvc.perform(MockMvcRequestBuilders.get("/api/menu/1"))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())
