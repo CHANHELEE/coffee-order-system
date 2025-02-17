@@ -35,7 +35,7 @@ class SecurityConfig(
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .authorizeHttpRequests { requests ->
                 requests
-                    .requestMatchers("/public/**").permitAll()
+                    .requestMatchers("/api/menu/**").permitAll()
                     .requestMatchers("/api/auth/**").permitAll()
                     .anyRequest().authenticated()
             }
