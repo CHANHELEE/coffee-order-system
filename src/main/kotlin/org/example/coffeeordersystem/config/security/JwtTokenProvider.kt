@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
@@ -13,8 +14,12 @@ import java.util.*
 @Component
 class JwtTokenProvider {
 
-    private val secretKey = "your-very-secret-key-your-very-secret-key"
-    private val validityInMilliseconds: Long = 360000000 // 100시간
+
+    @Value("\${jwt.secret}")
+    private lateinit var secretKey: String
+
+    @Value("\${jwt.validity}")
+    private var validityInMilliseconds: Long = 0
 
     fun createToken(username: String, role: String): String {
         val claims: Claims = Jwts.claims().setSubject(username)
