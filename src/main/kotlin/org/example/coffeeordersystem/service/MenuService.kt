@@ -15,8 +15,7 @@ class MenuService(
     fun findMenu(): List<MenuResponse> {
 
         var menu: List<Menu> = menuRepository.findAll()
-        val dto = menuMapper.toResponse(menu)
-        return dto
+        return menuMapper.toResponse(menu)
     }
 
     fun findMenu(id: Long): MenuResponse {
