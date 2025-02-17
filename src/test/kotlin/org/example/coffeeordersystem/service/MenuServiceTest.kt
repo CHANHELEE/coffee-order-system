@@ -1,7 +1,7 @@
 package org.example.coffeeordersystem.service
 
 import org.assertj.core.api.Assertions.*
-import org.example.coffeeordersystem.model.dto.MenuDto
+import org.example.coffeeordersystem.model.response.MenuResponse
 import org.example.coffeeordersystem.model.entity.Menu
 import org.example.coffeeordersystem.model.mapper.MenuMapper
 import org.example.coffeeordersystem.model.mapper.MenuMapperImpl
@@ -46,7 +46,7 @@ class MenuServiceTest {
         given(menuRepository.findAll()).willReturn(menuResponses)
 
         //when
-        val menu: List<MenuDto> = menuService.findMenu()
+        val menu: List<MenuResponse> = menuService.findMenu()
 
         //then
         assertThat(menu)
@@ -70,7 +70,7 @@ class MenuServiceTest {
         given(menuRepository.findAll()).willReturn(menuResponses)
 
         //when
-        val menu: List<MenuDto> = menuService.findMenu()
+        val menu: List<MenuResponse> = menuService.findMenu()
 
         //then
         assertThat(menu)

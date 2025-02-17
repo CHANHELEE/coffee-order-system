@@ -1,6 +1,6 @@
 package org.example.coffeeordersystem.service
 
-import org.example.coffeeordersystem.model.dto.MenuDto
+import org.example.coffeeordersystem.model.response.MenuResponse
 import org.example.coffeeordersystem.model.entity.Menu
 import org.example.coffeeordersystem.model.mapper.MenuMapper
 import org.example.coffeeordersystem.repository.MenuRepository
@@ -12,16 +12,16 @@ class MenuService(
     private val menuMapper: MenuMapper
 ) {
 
-    fun findMenu(): List<MenuDto> {
+    fun findMenu(): List<MenuResponse> {
 
         var menu: List<Menu> = menuRepository.findAll()
-        val dto = menuMapper.toDto(menu)
+        val dto = menuMapper.toResponse(menu)
         return dto
     }
 
-    fun findMenu(id: Long): MenuDto {
+    fun findMenu(id: Long): MenuResponse {
 //        TODO("RuntimeException  -> Custom Exception")
         var menu: Menu = menuRepository.findById(id).orElseThrow { RuntimeException("Menu not found") }
-        return menuMapper.toDto(menu)
+        return menuMapper.toResponse(menu)
     }
 }

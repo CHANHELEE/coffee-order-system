@@ -1,7 +1,7 @@
 package org.example.coffeeordersystem.controller
 
 import org.example.coffeeordersystem.ControllerTestSupporter
-import org.example.coffeeordersystem.model.dto.MenuDto
+import org.example.coffeeordersystem.model.response.MenuResponse
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
@@ -23,9 +23,9 @@ class MenuControllerTest : ControllerTestSupporter() {
     fun testFindMenu() {
 
         // given
-        val menuResponses: List<MenuDto> = listOf(
-            MenuDto(id = 1, name = "Americano", description = "Hot Americano", price = 3000L),
-            MenuDto(id = 2, name = "Latte", description = "Creamy Latte", price = 3500L)
+        val menuResponses: List<MenuResponse> = listOf(
+            MenuResponse(id = 1, name = "Americano", description = "Hot Americano", price = 3000L),
+            MenuResponse(id = 2, name = "Latte", description = "Creamy Latte", price = 3500L)
         )
         given(menuService.findMenu()).willReturn(menuResponses)
 
@@ -46,7 +46,7 @@ class MenuControllerTest : ControllerTestSupporter() {
     fun testFindMenuWithNull() {
 
         // given
-        val menuResponses: List<MenuDto> = emptyList()
+        val menuResponses: List<MenuResponse> = emptyList()
         given(menuService.findMenu()).willReturn(menuResponses)
 
         // when && then
@@ -63,7 +63,7 @@ class MenuControllerTest : ControllerTestSupporter() {
     fun testFindMenuDetail() {
 
         // given
-        val menuResponses: MenuDto = MenuDto(
+        val menuResponses: MenuResponse = MenuResponse(
             id = 1,
             name = "Americano",
             description = "Hot Americano",

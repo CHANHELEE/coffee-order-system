@@ -1,6 +1,6 @@
 package org.example.coffeeordersystem.controller
 
-import org.example.coffeeordersystem.model.dto.MenuDto
+import org.example.coffeeordersystem.model.response.MenuResponse
 import org.example.coffeeordersystem.service.MenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -16,16 +16,16 @@ class MenuController @Autowired constructor(
 ) {
 
     @GetMapping("")
-    fun findMenu(): ResponseEntity<List<MenuDto>> {
+    fun findMenu(): ResponseEntity<List<MenuResponse>> {
 
-        val menu: List<MenuDto>? = menuService.findMenu()
+        val menu: List<MenuResponse>? = menuService.findMenu()
         return ResponseEntity.ok(menu);
     }
 
     @GetMapping("/{id}")
-    fun findMenu(@PathVariable id: Long): ResponseEntity<MenuDto> {
+    fun findMenu(@PathVariable id: Long): ResponseEntity<MenuResponse> {
 
-        val menu: MenuDto? = menuService.findMenu(id)
+        val menu: MenuResponse? = menuService.findMenu(id)
         return ResponseEntity.ok(menu);
     }
 }

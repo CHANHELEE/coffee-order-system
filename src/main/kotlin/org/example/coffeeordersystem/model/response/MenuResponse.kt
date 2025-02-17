@@ -1,6 +1,6 @@
-package org.example.coffeeordersystem.model.dto
+package org.example.coffeeordersystem.model.response
 
-data class MenuDto(
+data class MenuResponse(
     var id: Long,
     var name: String,
     var description: String? = null,
