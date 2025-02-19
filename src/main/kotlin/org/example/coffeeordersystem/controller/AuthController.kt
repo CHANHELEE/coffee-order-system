@@ -6,7 +6,6 @@ import org.example.coffeeordersystem.model.response.LoginResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -15,8 +14,6 @@ class AuthController(
     private val authenticationManager: AuthenticationManager,
     private val jwtTokenProvider: JwtTokenProvider
 ) {
-
-    private val encoder = BCryptPasswordEncoder()
 
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
