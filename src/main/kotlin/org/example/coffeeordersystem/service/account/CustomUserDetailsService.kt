@@ -1,6 +1,6 @@
 package org.example.coffeeordersystem.service.account
 
-import org.example.coffeeordersystem.repository.UserRepository
+import org.example.coffeeordersystem.repository.AccountRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class CustomUserDetailsService(
-    private val userRepository: UserRepository
+    private val accountRepository: AccountRepository
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
-        val userEntity = userRepository.findByUsername(username)
+        val userEntity = accountRepository.findByUsername(username)
             ?: throw UsernameNotFoundException("User not found with username: $username")
 
         val authority = SimpleGrantedAuthority(userEntity.role)
