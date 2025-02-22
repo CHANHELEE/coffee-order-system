@@ -1,14 +1,14 @@
 package org.example.coffeeordersystem.controller
 
-import org.example.coffeeordersystem.ControllerTestSupporter
+import org.example.coffeeordersystem.common.ControllerTestSupporter
 import org.example.coffeeordersystem.model.response.MenuResponse
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithAnonymousUser
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
@@ -17,7 +17,6 @@ import java.util.*
 
 @WebMvcTest(
     controllers = [MenuController::class],
-    excludeAutoConfiguration = [UserDetailsServiceAutoConfiguration::class, SecurityAutoConfiguration::class]
 )
 @ActiveProfiles("test")
 class MenuControllerTest : ControllerTestSupporter() {
@@ -48,6 +47,7 @@ class MenuControllerTest : ControllerTestSupporter() {
     @DisplayName("[커피 메뉴 목록 조회 API] 메뉴가 없을 경우 빈배열을 반환한다.")
     @Test
     @Throws(Exception::class)
+//    @WithMockUser
     fun testFindMenuWithNull() {
 
         // given
@@ -65,6 +65,7 @@ class MenuControllerTest : ControllerTestSupporter() {
     @DisplayName("[커피 메뉴 조회 API] 메뉴 상세 정보를 조회한다.")
     @Test
     @Throws(Exception::class)
+//    @WithMockUser
     fun testFindMenuDetail() {
 
         // given
