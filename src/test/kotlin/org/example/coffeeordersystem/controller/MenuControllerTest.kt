@@ -47,7 +47,6 @@ class MenuControllerTest : ControllerTestSupporter() {
     @DisplayName("[커피 메뉴 목록 조회 API] 메뉴가 없을 경우 빈배열을 반환한다.")
     @Test
     @Throws(Exception::class)
-//    @WithMockUser
     fun testFindMenuWithNull() {
 
         // given
@@ -65,7 +64,6 @@ class MenuControllerTest : ControllerTestSupporter() {
     @DisplayName("[커피 메뉴 조회 API] 메뉴 상세 정보를 조회한다.")
     @Test
     @Throws(Exception::class)
-//    @WithMockUser
     fun testFindMenuDetail() {
 
         // given
