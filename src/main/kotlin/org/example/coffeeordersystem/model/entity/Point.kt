@@ -20,7 +20,6 @@ class Point(
 
     @Column(name = "point", nullable = false)
     var point: Long = point
-        protected set
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PointRepository : JpaRepository<Point, Long> {
+
+    fun findByAccountId(accountId: Long) : Point
 }
