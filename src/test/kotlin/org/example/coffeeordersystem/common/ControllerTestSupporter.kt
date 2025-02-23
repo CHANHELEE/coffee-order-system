@@ -1,9 +1,11 @@
 package org.example.coffeeordersystem.common
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.example.coffeeordersystem.common.resolver.CurrentUserHandlerMethodArgumentResolver
 import org.example.coffeeordersystem.config.SecurityConfigTest
 import org.example.coffeeordersystem.config.security.JwtTokenProvider
 import org.example.coffeeordersystem.service.MenuService
+import org.example.coffeeordersystem.service.PointService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.bean.override.mockito.MockitoBean
@@ -19,6 +21,10 @@ abstract class ControllerTestSupporter {
     protected lateinit var menuService: MenuService
 
     @MockitoBean
-    protected lateinit var currentUserHandlerMethodArgumentResolver: CurrentUserHandlerMethodArgumentResolver;
+    protected lateinit var pointService: PointService
 
+    @MockitoBean
+    protected lateinit var currentUserHandlerMethodArgumentResolver: CurrentUserHandlerMethodArgumentResolver
+
+    protected  val objectMapper = ObjectMapper()
 }

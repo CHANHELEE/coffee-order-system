@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate
 @Table(name = "account")
 @DynamicUpdate
 class Account(
+    id: Long,
     name: String,
     role: String,
     password: String,
