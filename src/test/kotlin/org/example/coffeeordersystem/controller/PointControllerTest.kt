@@ -90,4 +90,24 @@ class PointControllerTest : ControllerTestSupporter() {
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
     }
 
+    @DisplayName("[포인트 충전 API] 특정 사용자의 포인트 충전시 로그인한 사용자와 충전 하고자 하는 사용자의 식별값이 다르면 충전에 실패한다.")
+    @Test
+    @Throws(Exception::class)
+    fun testRechargePointWithConflictAccount() {
+
+        // given
+        val accountId = 2L
+        val rechargingPoint = 1000L
+        val pointRechargeRequest = PointRechargeRequest(accountId, rechargingPoint)
+        val requestBody = objectMapper.writeValueAsString(pointRechargeRequest)
+
+        // when && then
+        mockMvc.perform(
+            MockMvcRequestBuilders.patch("/api/point/recharge")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody) )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    }
+
 }

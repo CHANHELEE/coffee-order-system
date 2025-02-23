@@ -1,6 +1,7 @@
 package org.example.coffeeordersystem.controller
 
 import jakarta.validation.Valid
+import org.apache.coyote.BadRequestException
 import org.example.coffeeordersystem.common.annotation.CurrentUser
 import org.example.coffeeordersystem.model.entity.Account
 import org.example.coffeeordersystem.model.request.PointRechargeRequest
@@ -22,9 +23,9 @@ class PointController(
     fun recharge(
         @CurrentUser account: Account,
         @RequestBody @Valid pointRechargeRequest: PointRechargeRequest
-    ): ResponseEntity<PointRechargeResponse> {
+    ): ResponseEntity<PointRechargeResponse> =
+        account.takeIf { account.id == pointRechargeRequest.accountId }
+            ?.run { ResponseEntity.ok(pointService.recharge(pointRechargeRequest)) }
+            ?: ResponseEntity.badRequest().build()
 
-        val pointRechargeResponse = pointService.recharge(pointRechargeRequest)
-        return ResponseEntity.ok(pointRechargeResponse)
-    }
 }
