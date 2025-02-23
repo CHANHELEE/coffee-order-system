@@ -11,6 +11,7 @@ import org.hamcrest.MatcherAssert.*
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
@@ -60,6 +61,26 @@ class PointServiceTest {
             .extracting("id", "point", "accountId")
             .contains(pointId, accountPoint + rechargingPoint, accountId)
 
+    }
+
+    @DisplayName("[포인트 충전 API] 특정 사용자의 포인트를 충전시 존재하지 않는 사용자일 경우 실패한다.")
+    @Test
+    @Throws(Exception::class)
+    fun testRechargePointWithNotExistAccountId() {
+
+        // given
+        val accountId = 1L
+        val rechargingPoint = 1000L
+
+        val pointRechargeRequest = PointRechargeRequest(accountId, rechargingPoint)
+
+        given(pointRepository.findByAccountId(accountId)).willReturn(null)
+
+        // when & then
+        val exception = assertThrows<RuntimeException> {
+            pointService.recharge(pointRechargeRequest)
+        }
+        assertThat(exception.message).isEqualTo("Point not found for accountId: ${pointRechargeRequest.accountId}")
     }
 
 }
