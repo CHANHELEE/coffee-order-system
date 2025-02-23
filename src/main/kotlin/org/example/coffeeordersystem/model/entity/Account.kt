@@ -8,7 +8,7 @@ import org.hibernate.annotations.DynamicUpdate
 @Table(name = "account")
 @DynamicUpdate
 class Account(
-    id: Long,
+    id: Long? = null,
     name: String,
     role: String,
     password: String,
@@ -17,7 +17,7 @@ class Account(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    var id: Long? = id
         protected set
 
     @Column(name = "username", nullable = false)

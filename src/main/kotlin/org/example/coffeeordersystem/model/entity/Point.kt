@@ -8,14 +8,14 @@ import org.hibernate.annotations.DynamicUpdate
 @Table(name = "point")
 @DynamicUpdate
 class Point(
-    id: Long,
+    id: Long? = null,
     point: Long,
     account: Account
 ) : BaseEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    var id: Long? = id
         protected set
 
     @Column(name = "point", nullable = false)
