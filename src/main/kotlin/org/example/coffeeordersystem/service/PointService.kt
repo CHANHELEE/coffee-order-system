@@ -14,7 +14,7 @@ class PointService(
 
     fun recharge(pointRechargeRequest: PointRechargeRequest): PointRechargeResponse =
         pointRepository.findByAccountId(pointRechargeRequest.accountId!!)
-            .apply { point -= pointRechargeRequest.point!! }
+            .apply { point += pointRechargeRequest.point!! }
             .let { pointRepository.save(it) }
             .let { pointMapper.toResponse(it) }
 }
