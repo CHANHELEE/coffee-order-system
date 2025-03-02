@@ -10,10 +10,20 @@ spring:
     hibernate:
       ddl-auto: update  # 개발 중에는 update, 운영 시에는 validate 또는 none 권장
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
     open-in-view: false
-  logging:
-    level:
-      org.springframework.security: INFO
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+        orm:
+          jpa: DEBUG
+        transaction: DEBUG
 
 jwt:
   secret: "your-very-secret-key-your-very-secret-key"
